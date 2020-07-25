@@ -1,0 +1,48 @@
+{% extends "ecommerce/base.html" %}
+
+{% block content %}
+	<div class="container products-view-user">
+		{% csrf_token %}
+		<form class = "post-list">
+			<input type = "hidden" value = "" />
+		</form>
+		
+		<div class="form-inline float-left">
+			<label>Per Page:</label>
+			<select class="form-control ml-sm-2 post_max">
+				<option value="5">5</option>
+				<option value="10" selected>10</option>
+				<option value="15">15</option>
+			</select>
+		
+			<label class="ml-sm-3 mt-3 mt-xl-0">Search Keyword:</label>
+			<input type="text" class="form-control ml-sm-2 post_search_text" placeholder="Enter a keyword">
+			<input type = "submit" value = "Filter" class = "btn btn-primary mt-3 mt-xl-0 post_search_submit" />
+		</div>
+		
+		<a href="/ecommerce/user/product/create/" class="btn btn-primary mb-3 float-right">Add New</a>
+		
+		<br class = "clear" />
+		
+		<div class = "wave-box-wrapper">
+			<div class = "wave-box"></div>
+			<div class = "table-responsive">
+				<table class = "table table-striped table-post-list">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th id = "name" class = "active"><a href = "#">Name</a></th>
+							<th id = "price"><a href = "#">Price</a></th>
+							<th id = "status"><a href = "#">Status</a></th>
+							<th id = "date"><a href = "#">Date</a></th>
+							<th id = "quantity"><a href = "#">Quantity</a></th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody class = "pagination-container"></tbody>
+				</table>
+			</div>
+			<div class = "pagination-nav"></div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "ecommerce/base.html" %}
+
+{% block content %}
+	<div class="container wave-box-wrapper">
+		<div class="wave-box"></div>
+		<form action="{% url 'ecommerce:user_account' %}" method="post" class="update-account">
+			{% csrf_token %}
+			<div class="col-md-10 offset-md-1">
+				<div class="card">
+					<div class="card-header">My Account</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="{{ form.username.id_for_label }}" class="col-md-3 control-label text-md-right">Username<span class="text-danger">*</span>:</label>
+							<div class="col-md-7">
+								{{ form.username }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.email.id_for_label }}" class="col-md-3 control-label text-md-right">Email<span class="text-danger">*</span>:</label>
+							<div class="col-md-7">
+								{{ form.email }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.old_password.id_for_label }}" class="col-md-3 control-label text-md-right">Old password:</label>
+							<div class="col-md-7">
+								{{ form.old_password }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.password.id_for_label }}" class="col-md-3 control-label text-md-right">New password:</label>
+							<div class="col-md-7">
+								{{ form.password }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.password_repeat.id_for_label }}" class="col-md-3 control-label text-md-right">Confirm New password:</label>
+							<div class="col-md-7">
+								{{ form.password_repeat }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.first_name.id_for_label }}" class="col-md-3 control-label text-md-right">First Name:</label>
+							<div class="col-md-7">
+								{{ form.first_name }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.last_name.id_for_label }}" class="col-md-3 control-label text-md-right">Last Name:</label>
+							<div class="col-md-7">
+								{{ form.last_name }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.phone_number.id_for_label }}" class="col-md-3 control-label text-md-right">Phone Number:</label>
+							<div class="col-md-7">
+								{{ form.phone_number }}
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="{{ form.about_me.id_for_label }}" class="col-md-3 control-label text-md-right">About Me:</label>
+							<div class="col-md-7">
+								{{ form.about_me }}
+							</div>
+						</div>
+						<div class="col-md-7 offset-md-3 px-0 px-xl-2">
+							<input type="submit" value="Update" class="btn btn-primary">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

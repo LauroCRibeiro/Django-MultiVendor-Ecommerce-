@@ -1,0 +1,80 @@
+{% extends "ecommerce/base.html" %}
+
+{% block content %}
+	<div class="container item-edit" id="item-{{ product.id }}">
+		<p>
+			<u><a href = "{% url 'ecommerce:user_products' %}" class="font-weight-bold">My Products</a></u>&nbsp; |&nbsp;
+			<u><a href = "{% url 'ecommerce:single_product' product.id %}" target="_blank" class="font-weight-bold">View Product</a></u>
+		</p>
+		
+		<div class="wave-box-wrapper">
+			<div class="wave-box"></div>
+			<form action="{% url 'ecommerce:user_product_update' product.id %}" method="post" enctype="multipart/form-data" class="row update-product" >
+				{% csrf_token %}
+				<div class="col-md-8">
+					<div class="form-group">
+						<label for="{{ form.name.id_for_label }}">Name</label>
+						{{ form.name }}
+					</div>
+					<div class="form-group">
+						<label for="{{ form.content.id_for_label }}">Description</label>
+						{{ form.content }}
+					</div>
+					<div class="form-group">
+						<label for="{{ form.excerpt.id_for_label }}">Short Description</label>
+						{{ form.excerpt }}
+					</div>
+					<div class="form-group">
+						<label for="{{ form.images.id_for_label }}">Upload Images</label>
+						{{ form.images }}
+						<hr />
+						
+						<div class="images-section row">
+							{% if product.image_set.all %}
+								{% for data in product.image_set.all %}
+									<div class="col-sm-3 mb-3">
+										<i class="unset-image fas fa-trash-alt text-danger mr-2 c-p" id="unset-{{ data.id }}" title="Delete image"></i>
+										{% if product.featured_image == data.image %}
+											<i class="set-featured-image fas fa-star c-p" title="Set as featured image" id="featured-{{ data.image }}" style="color: #E4C317"></i>
+										{% else %}
+											<i class="set-featured-image far fa-star c-p" title="Set as featured image" id="featured-{{ data.image }}"></i>
+										{% endif %}
+										<div>
+											<img src = "/ecommerce/{{ data.image }}" class="img-thumbnail img-responsive" />
+										</div>
+									</div>
+									
+									{% if forloop.counter|divisibleby:4 == 1 %}
+										<div class="clearfix"></div>
+									{% endif %}
+								{% endfor %}
+							{% else %}
+								<div class="alert alert-danger no-item-images w-100 mx-3">No images found</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="{{ form.price.id_for_label }}">Price</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fas fa-dollar-sign"></i></span>
+							</div>
+							{{ form.price }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="{{ form.status.id_for_label }}">Status</label>
+						{{ form.status }}
+					</div>
+					<div class="form-group">
+						<label for="{{ form.quantity.id_for_label }}">Quantity</label>
+						{{ form.quantity }}
+					</div>
+					<input type="submit" class="btn btn-primary" value="Update" />
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
